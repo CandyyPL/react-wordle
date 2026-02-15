@@ -1,10 +1,11 @@
 @import "@fontsource/outfit/600";
 
 .heading {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-family: "Outfit", sans-serif;
   font-weight: bold;
   color: black;
+  text-align: center;
 
   margin: 0;
 }
