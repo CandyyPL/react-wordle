@@ -1,0 +1,35 @@
+.keyboardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.keyboardRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+}
+
+.keyboardKey {
+  width: 40px;
+  height: 55px;
+
+  background-color: #ccc;
+
+  border-radius: 6px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Outfit", sans-serif;
+}
+
+.wideKey {
+  width: 60px;
+}
+
+.enterKey {
+  font-size: 26px;
+}
