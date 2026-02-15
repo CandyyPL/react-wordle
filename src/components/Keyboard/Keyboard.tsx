@@ -1,4 +1,3 @@
-import SingleLetter from "../SingleLetter/SingleLetter";
 import style from "./Keyboard.module.css";
 
 const Keyboard = () => {

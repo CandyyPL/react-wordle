@@ -12,8 +12,8 @@
 }
 
 .keyboardKey {
-  width: 40px;
-  height: 55px;
+  width: 35px;
+  height: 50px;
 
   background-color: #ccc;
 
@@ -24,10 +24,16 @@
   align-items: center;
 
   font-family: "Outfit", sans-serif;
+
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid black;
+  }
 }
 
 .wideKey {
-  width: 60px;
+  width: 55px;
 }
 
 .enterKey {
