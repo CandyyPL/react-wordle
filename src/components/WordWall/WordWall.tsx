@@ -8,8 +8,8 @@ const WordWall = () => {
 
   return (
     <section className={style.wordWallWrapper}>
-      {currentWords.map((word) => (
-        <SingleWord word={word} />
+      {currentWords.map((word, index) => (
+        <SingleWord key={index} word={word} wordIdx={index} />
       ))}
     </section>
   );

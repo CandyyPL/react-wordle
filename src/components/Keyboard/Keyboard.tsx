@@ -9,22 +9,30 @@ const Keyboard = () => {
 
   return (
     <section className={style.keyboardWrapper}>
-      {rows.map((row) => (
-        <div className={style.keyboardRow}>
-          {row.map((letter) => (
+      {rows.map((row, rId) => (
+        <div key={rId} className={style.keyboardRow}>
+          {row.map((letter, lId) => (
             <>
               {letter === "@" && (
                 <div
+                  key={`${rId}${lId}`}
                   className={`${style.keyboardKey} ${style.wideKey} ${style.enterKey}`}
                 >
                   ↵
                 </div>
               )}
               {letter === "#" && (
-                <div className={`${style.keyboardKey} ${style.wideKey}`}>⌫</div>
+                <div
+                  key={`${rId}${lId}`}
+                  className={`${style.keyboardKey} ${style.wideKey}`}
+                >
+                  ⌫
+                </div>
               )}
               {letter !== "@" && letter !== "#" && (
-                <div className={style.keyboardKey}>{letter.toUpperCase()}</div>
+                <div key={`${rId}${lId}`} className={style.keyboardKey}>
+                  {letter.toUpperCase()}
+                </div>
               )}
             </>
           ))}
