@@ -7,7 +7,14 @@ type Props = {
 
 const GameProvider = ({ children }: Props) => {
   const wordToGuess = useRef("");
-  const [currentWords, setCurrentWords] = useState(["", "", "", "", "", ""]);
+  const [currentWords, setCurrentWords] = useState([
+    "######",
+    "######",
+    "######",
+    "######",
+    "######",
+    "######",
+  ]);
 
   const provide = {
     wordToGuess,

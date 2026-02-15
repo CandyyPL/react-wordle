@@ -1,10 +1,16 @@
 import SingleLetter from "../SingleLetter/SingleLetter";
 import style from "./SingleWord.module.css";
 
-const SingleWord = () => {
+type Props = {
+  word: string;
+};
+
+const SingleWord = ({ word }: Props) => {
   return (
     <div className={style.wordWrapper}>
-      <SingleLetter />
+      {Array.from(word).map((letter) => (
+        <SingleLetter />
+      ))}
     </div>
   );
 };
