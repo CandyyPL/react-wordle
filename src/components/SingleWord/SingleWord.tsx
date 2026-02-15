@@ -10,7 +10,7 @@ const SingleWord = ({ word, wordIdx }: Props) => {
   return (
     <div className={style.wordWrapper}>
       {Array.from(word).map((letter, index) => (
-        <SingleLetter key={`${wordIdx}${index}`} />
+        <SingleLetter key={`${wordIdx}${index}`} letter={letter} />
       ))}
     </div>
   );

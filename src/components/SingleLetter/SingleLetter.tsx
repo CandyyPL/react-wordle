@@ -1,7 +1,13 @@
 import style from "./SingleLetter.module.css";
 
-const SingleLetter = () => {
-  return <div className={style.letterBox}></div>;
+type Props = {
+  letter: string;
+};
+
+const SingleLetter = ({ letter }: Props) => {
+  return (
+    <div className={style.letterBox}>{letter === "#" ? null : letter}</div>
+  );
 };
 
 export default SingleLetter;
