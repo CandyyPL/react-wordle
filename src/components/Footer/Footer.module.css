@@ -1,0 +1,11 @@
+@import "@fontsource/outfit/400";
+
+.footerWrapper {
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+
+  a {
+    text-decoration: none;
+  }
+}
