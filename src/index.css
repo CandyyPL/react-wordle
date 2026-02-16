@@ -27,12 +27,17 @@ main {
 
   background-color: #eee;
 
-  padding-top: 20px;
-  padding-bottom: 20px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 25px;
+  gap: 1.5rem;
+
+  @media all and (min-width: 768px) {
+    gap: 2rem;
+  }
+
+  @media all and (min-width: 1280px) {
+    gap: 3rem;
+  }
 }
