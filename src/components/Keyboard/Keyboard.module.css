@@ -15,14 +15,14 @@
   width: 30px;
   height: 45px;
 
-  @media all and (min-width: 768px) {
+  @media all and (width >= 768px) {
     width: 40px;
     height: 55px;
 
     font-size: 1.2rem;
   }
 
-  @media all and (min-width: 1280px) {
+  @media all and (width >= 1280px) {
     width: 50px;
     height: 65px;
 
@@ -49,11 +49,11 @@
 .wideKey {
   width: 50px;
 
-  @media all and (min-width: 768px) {
+  @media all and (width >= 768px) {
     width: 60px;
   }
 
-  @media all and (min-width: 1280px) {
+  @media all and (width >= 1280px) {
     width: 75px;
   }
 }
@@ -61,7 +61,7 @@
 .enterKey {
   font-size: 1.625rem;
 
-  @media all and (min-width: 1280px) {
+  @media all and (width >= 1280px) {
     font-size: 1.8rem;
   }
 }
