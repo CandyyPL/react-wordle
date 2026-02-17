@@ -22,4 +22,44 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.active {
+    background-color: #ddd;
+
+    border: 2px dashed #000;
+
+    animation: pop 0.2s;
+  }
+
+  &.exact,
+  &.included,
+  &.fail {
+    border: none;
+
+    animation: check 0.2s;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes check {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
