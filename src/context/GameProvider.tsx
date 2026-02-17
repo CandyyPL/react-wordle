@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { GameContext } from "./GameContext";
+import { GameContext } from "@/context/GameContext";
 
 type Props = {
   children: React.ReactNode;

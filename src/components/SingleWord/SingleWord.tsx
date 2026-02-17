@@ -1,4 +1,4 @@
-import SingleLetter from "../SingleLetter/SingleLetter";
+import SingleLetter from "@/components/SingleLetter/SingleLetter";
 import style from "./SingleWord.module.css";
 
 type Props = {

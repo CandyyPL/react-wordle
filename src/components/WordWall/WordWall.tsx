@@ -1,7 +1,6 @@
 import style from "./WordWall.module.css";
-import useGame from "../../hooks/useGame";
-import SingleWord from "../SingleWord/SingleWord";
-import "./WordWall.module.css";
+import useGame from "@/hooks/useGame";
+import SingleWord from "@/components/SingleWord/SingleWord";
 
 const WordWall = () => {
   const { currentWords } = useGame();
