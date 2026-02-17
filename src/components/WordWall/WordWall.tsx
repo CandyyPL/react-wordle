@@ -3,11 +3,11 @@ import useGame from "@/hooks/useGame";
 import SingleWord from "@/components/SingleWord/SingleWord";
 
 const WordWall = () => {
-  const { currentWords } = useGame();
+  const { words } = useGame();
 
   return (
     <section className={style.wordWallWrapper}>
-      {currentWords.map((word, index) => (
+      {words.map((word, index) => (
         <SingleWord key={index} word={word} wordIdx={index} />
       ))}
     </section>
