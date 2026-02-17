@@ -1,9 +1,7 @@
-@import "@fontsource/outfit/600";
-
 .heading {
   font-size: 2rem;
   font-family: "Outfit", sans-serif;
-  font-weight: bold;
+  font-weight: 600;
   color: black;
   text-align: center;
 
