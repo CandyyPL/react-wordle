@@ -29,22 +29,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  &.active {
-    background-color: #ddd;
+.active {
+  background-color: #ddd;
 
-    border: 2px dashed #000;
+  border: 2px dashed #000;
+}
 
-    animation: pop 0.2s;
-  }
+.pop {
+  animation: pop 0.2s;
+}
 
-  &.exact,
-  &.included,
-  &.fail {
-    border: none;
+.exact,
+.included,
+.fail {
+  border: none;
 
-    animation: check 0.2s;
-  }
+  animation: check 0.2s;
+}
+
+.included {
+  background-color: hsl(50, 88%, 38%);
+}
+
+.exact {
+  background-color: hsl(147, 88%, 38%);
+}
+
+.fail {
+  background-color: #aaa;
 }
 
 @keyframes pop {
