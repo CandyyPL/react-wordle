@@ -5,18 +5,16 @@ type Props = {
   children: React.ReactNode;
 };
 
-const letters = Array.from("qwertyuiopasdfghjklzxcvbnm");
+const WORD_LENGTH = 6;
+const WORDS_COUNT = 6;
+
+const EMPTY_WORD = new Array(WORD_LENGTH).fill("#").join("");
 
 const GameProvider = ({ children }: Props) => {
-  const wordToGuess = useRef("COMMIT");
-  const [words, setWords] = useState([
-    "######",
-    "######",
-    "######",
-    "######",
-    "######",
-    "######",
-  ]);
+  const correctWord = useRef("COMMIT");
+
+  const [currentWord, setCurrentWord] = useState(EMPTY_WORD);
+  const [words, setWords] = useState(new Array(WORDS_COUNT).fill(EMPTY_WORD));
 
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
   const [currentLetterIdx, setCurrentLetterIdx] = useState(0);
@@ -28,42 +26,46 @@ const GameProvider = ({ children }: Props) => {
   const handleKeyPress = (key: string, event: KeyboardEvent | null = null) => {
     if (event) key = event.key;
 
-    if (key === "Enter" && currentLetterIdx === 6 && currentWordIdx < 5) {
+    if (key === "Enter" && currentLetterIdx === 6) {
+      setWords((prev) =>
+        prev.map((word, index) => {
+          if (index === currentWordIdx) {
+            return currentWord;
+          } else return word;
+        }),
+      );
+
+      setCurrentWord(EMPTY_WORD);
+
       setCurrentWordIdx((prev) => prev + 1);
       setCurrentLetterIdx(0);
     }
 
+    if (currentWordIdx === 6) return;
+
     if (key === "Backspace" && currentLetterIdx > 0) {
-      const word = words[currentWordIdx];
-      const newWord = replaceAtWith(word, currentLetterIdx - 1, "#");
+      const newWord = replaceAtWith(currentWord, currentLetterIdx - 1, "#");
 
-      setWords((prev) =>
-        prev.map((word, idx) => {
-          if (idx === currentWordIdx) return newWord;
-          else return word;
-        }),
-      );
-
+      setCurrentWord(newWord);
       setCurrentLetterIdx((prev) => prev - 1);
     }
 
-    if (letters.includes(key) && currentLetterIdx < 6) {
-      const word = words[currentWordIdx];
-      const newWord = replaceAtWith(word, currentLetterIdx, key.toUpperCase());
-
-      setWords((prev) =>
-        prev.map((word, idx) => {
-          if (idx === currentWordIdx) return newWord;
-          else return word;
-        }),
+    if (/^[a-zA-Z]$/.test(key) && currentLetterIdx < 6) {
+      const newWord = replaceAtWith(
+        currentWord,
+        currentLetterIdx,
+        key.toUpperCase(),
       );
 
+      setCurrentWord(newWord);
       setCurrentLetterIdx((prev) => prev + 1);
     }
   };
 
   const provide = {
-    wordToGuess,
+    correctWord,
+    currentWord,
+    setCurrentWord,
     words,
     setWords,
     currentWordIdx,

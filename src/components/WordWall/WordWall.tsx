@@ -1,15 +1,21 @@
 import style from "./WordWall.module.css";
-import useGame from "@/hooks/useGame";
 import SingleWord from "@/components/SingleWord/SingleWord";
 
-const WordWall = () => {
-  const { words } = useGame();
+type Props = {
+  words: string[];
+  currentWord: string;
+  currentWordIdx: number;
+};
 
+const WordWall = ({ words, currentWord, currentWordIdx }: Props) => {
   return (
     <section className={style.wordWallWrapper}>
-      {words.map((word, index) => (
-        <SingleWord key={index} word={word} wordIdx={index} />
-      ))}
+      {words.map((word, index) => {
+        if (index === currentWordIdx) {
+          return <SingleWord key={index} word={currentWord} wordIdx={index} />;
+        }
+        return <SingleWord key={index} word={word} wordIdx={index} />;
+      })}
     </section>
   );
 };

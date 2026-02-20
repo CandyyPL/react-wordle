@@ -4,3 +4,69 @@
   align-items: center;
   gap: 0.25rem;
 }
+
+.letterBox {
+  width: 50px;
+  height: 50px;
+
+  @media all and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media all and (min-width: 1280px) {
+    width: 75px;
+    height: 75px;
+  }
+
+  font-size: 2rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+
+  border: 2px solid #666;
+  border-radius: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.active {
+    background-color: #ddd;
+
+    border: 2px dashed #000;
+
+    animation: pop 0.2s;
+  }
+
+  &.exact,
+  &.included,
+  &.fail {
+    border: none;
+
+    animation: check 0.2s;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes check {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

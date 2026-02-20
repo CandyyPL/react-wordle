@@ -1,7 +1,9 @@
 import { createContext, type RefObject, type SetStateAction } from "react";
 
 export type GameContextType = {
-  wordToGuess: RefObject<string>;
+  correctWord: RefObject<string>;
+  currentWord: string;
+  setCurrentWord: React.Dispatch<SetStateAction<string>>;
   words: string[];
   setWords: React.Dispatch<SetStateAction<string[]>>;
   currentWordIdx: number;

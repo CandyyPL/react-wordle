@@ -1,4 +1,3 @@
-import SingleLetter from "@/components/SingleLetter/SingleLetter";
 import style from "./SingleWord.module.css";
 
 type Props = {
@@ -10,7 +9,9 @@ const SingleWord = ({ word, wordIdx }: Props) => {
   return (
     <div className={style.wordWrapper}>
       {Array.from(word).map((letter, index) => (
-        <SingleLetter key={`${wordIdx}${index}`} letter={letter} />
+        <div className={style.letterBox} key={`${word}-${index}`}>
+          {letter === "#" ? null : letter}
+        </div>
       ))}
     </div>
   );
