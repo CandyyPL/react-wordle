@@ -1,8 +1,5 @@
+import useGame from "@/hooks/useGame";
 import style from "./Keyboard.module.css";
-
-type Props = {
-  handleKeyPress: (key: string, event?: KeyboardEvent | null) => void;
-};
 
 type KeyData = {
   style: string;
@@ -10,7 +7,9 @@ type KeyData = {
   key: string;
 };
 
-const Keyboard = ({ handleKeyPress }: Props) => {
+const Keyboard = () => {
+  const { handleKeyPress } = useGame();
+
   const rows = ["qwertyuiop", "asdfghjkl", "@zxcvbnm#"];
 
   const getKeyData = (char: string): KeyData => {
