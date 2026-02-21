@@ -90,7 +90,10 @@ const GameProvider = ({ children }: Props) => {
     if (key === ENTER_KEY) {
       if (currentLetterIdx !== WORD_LENGTH) return;
 
-      if (!wordlist.includes(currentWord.word)) {
+      if (
+        !wordlist.includes(currentWord.word) ||
+        words.includes(currentWord.word)
+      ) {
         setCurrentWord((prev) => ({ ...prev, wrong: true }));
         return;
       }
