@@ -6,6 +6,7 @@
   text-align: center;
 
   margin: 0;
+  margin-top: 10px;
 
   @media all and (min-width: 768px) {
     font-size: 3rem;
