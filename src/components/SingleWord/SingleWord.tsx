@@ -29,9 +29,23 @@ const SingleWord = ({ word, wordIdx }: Props) => {
         const pop = active && currentWord.wordArray[index].new;
         const invalid = isCurrent && currentWord.wrong;
 
+        const color = fail
+          ? "#858585"
+          : included
+            ? exact
+              ? "#50d676"
+              : "#dfa253"
+            : "#ddd";
+
         return (
           <div
-            className={`${style.letterBox} ${invalid && style.shake} ${active && style.active} ${included && style.included} ${exact && style.exact} ${fail && style.fail} ${pop && style.pop}`}
+            className={`${style.letterBox} ${active && style.active} ${included && style.included} ${exact && style.exact} ${fail && style.fail} ${pop && style.pop} ${invalid && style.shake}`}
+            style={
+              {
+                "--index": index,
+                "--target-bg": color,
+              } as React.CSSProperties
+            }
             key={`${word}-${index}`}
           >
             {letter === "#" ? null : letter}

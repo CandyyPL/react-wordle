@@ -52,12 +52,15 @@
 .exact,
 .included,
 .fail {
-  border: none;
+  background-color: #ddd;
 
-  animation: check 0.2s;
+  border: 2px dashed #000;
+
+  animation: check 0.3s forwards;
+  animation-delay: calc(var(--index) * 100ms);
 }
 
-.included {
+/* .included {
   background-color: hsl(50, 88%, 38%);
 }
 
@@ -67,7 +70,7 @@
 
 .fail {
   background-color: #aaa;
-}
+} */
 
 .shake {
   animation: shake 0.2s;
@@ -88,12 +91,16 @@
 @keyframes check {
   0% {
     transform: scale(1);
+    border: none;
   }
   50% {
     transform: scale(0.95) rotate(-5deg);
+    background-color: var(--target-bg);
   }
   100% {
     transform: scale(1);
+    background-color: var(--target-bg);
+    border: none;
   }
 }
 
