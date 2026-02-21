@@ -33,13 +33,23 @@ const GameProvider = ({ children }: Props) => {
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
   const [currentLetterIdx, setCurrentLetterIdx] = useState(0);
 
+  const [exactLetters, setExactLetters] = useState<string[]>([]);
+  const [includedLetters, setIncludedLetters] = useState<string[]>([]);
+  const [notIncludedLetters, setNotIncludedLetters] = useState<string[]>([]);
+
   useEffect(() => {
     console.log(correctWord.current);
   }, []);
 
+  // useEffect(() => {
+  //   console.log(currentWord);
+  // }, [currentWord]);
+
   useEffect(() => {
-    console.log(currentWord);
-  }, [currentWord]);
+    console.log(exactLetters);
+    console.log(includedLetters);
+    console.log(notIncludedLetters);
+  }, [exactLetters, includedLetters, notIncludedLetters]);
 
   const handleSetCurrentWord = (word: string) => {
     setCurrentWord((prev) => {
@@ -67,6 +77,19 @@ const GameProvider = ({ children }: Props) => {
       if (!wordlist.includes(currentWord.word)) {
         setCurrentWord((prev) => ({ ...prev, wrong: true }));
         return;
+      }
+
+      for (let i = 0; i < 6; i++) {
+        const userLetter = currentWord.word[i];
+        const correctLetter = correctWord.current[i];
+
+        if (!correctWord.current.includes(userLetter))
+          setNotIncludedLetters((prev) => [...prev, userLetter]);
+        else {
+          if (userLetter === correctLetter)
+            setExactLetters((prev) => [...prev, userLetter]);
+          else setIncludedLetters((prev) => [...prev, userLetter]);
+        }
       }
 
       setWords((prev) => {
@@ -123,6 +146,12 @@ const GameProvider = ({ children }: Props) => {
     setCurrentWordIdx,
     currentLetterIdx,
     setCurrentLetterIdx,
+    exactLetters,
+    setExactLetters,
+    includedLetters,
+    setIncludedLetters,
+    notIncludedLetters,
+    setNotIncludedLetters,
     handleKeyPress,
   };
 

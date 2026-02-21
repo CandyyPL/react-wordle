@@ -19,6 +19,12 @@ export type GameContextType = {
   setCurrentWordIdx: React.Dispatch<SetStateAction<number>>;
   currentLetterIdx: number;
   setCurrentLetterIdx: React.Dispatch<SetStateAction<number>>;
+  exactLetters: string[];
+  setExactLetters: React.Dispatch<SetStateAction<string[]>>;
+  includedLetters: string[];
+  setIncludedLetters: React.Dispatch<SetStateAction<string[]>>;
+  notIncludedLetters: string[];
+  setNotIncludedLetters: React.Dispatch<SetStateAction<string[]>>;
   handleKeyPress: (key: string, event?: KeyboardEvent | null) => void;
 };
 
