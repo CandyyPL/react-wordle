@@ -6,13 +6,17 @@ const EndGameModal = () => {
   const { gameState, correctWord } = useGame();
 
   const win = gameState?.state === GAME_WIN;
+  const attempts = gameState?.attempts;
 
   return (
     <div className={style.back}>
       <div className={style.modal}>
         <h1>{win ? "WYGRANA" : "PORAŻKA"}</h1>
         {win ? (
-          <p>Poprawnie udało Ci się odgadnąć hasło:</p>
+          <p>
+            Poprawnie udało Ci się odgadnąć hasło w {attempts}{" "}
+            {attempts === 1 ? "próbie" : "próbach"}:
+          </p>
         ) : (
           <p>Nie udało ci się odgadnąć hasła:</p>
         )}

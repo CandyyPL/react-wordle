@@ -4,8 +4,8 @@ import WordWall from "@/components/WordWall/WordWall";
 import Keyboard from "@/components/Keyboard/Keyboard";
 import Footer from "@/components/Footer/Footer";
 import useGame from "@/hooks/useGame";
-import "@/assets/index.css";
 import EndGameModal from "@/components/EndGameModal/EndGameModal";
+import "@/assets/index.css";
 
 const App = () => {
   const { handleKeyPress, gameState } = useGame();
