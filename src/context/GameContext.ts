@@ -14,6 +14,9 @@ export type GameStateType = {
   attempts?: number;
 };
 
+export const GAME_WIN = "win";
+export const GAME_LOSE = "lose";
+
 export type GameContextType = {
   correctWord: RefObject<string>;
   currentWord: CurrentWordType;

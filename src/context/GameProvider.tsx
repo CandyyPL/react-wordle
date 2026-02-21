@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  GAME_LOSE,
+  GAME_WIN,
   GameContext,
   type CurrentWordType,
   type GameStateType,
@@ -18,9 +20,6 @@ const BACKSPACE_KEY = "Backspace";
 
 const EMPTY_WORD = new Array(WORD_LENGTH).fill("#").join("");
 const CHOSEN_WORD = wordlist[Math.floor(Math.random() * wordlist.length)];
-
-const GAME_WIN = "win";
-const GAME_LOSE = "lose";
 
 const GameProvider = ({ children }: Props) => {
   const correctWord = useRef(CHOSEN_WORD);
@@ -54,11 +53,11 @@ const GameProvider = ({ children }: Props) => {
   //   console.log(currentWord);
   // }, [currentWord]);
 
-  useEffect(() => {
-    console.log(exactLetters);
-    console.log(includedLetters);
-    console.log(notIncludedLetters);
-  }, [exactLetters, includedLetters, notIncludedLetters]);
+  // useEffect(() => {
+  //   console.log(exactLetters);
+  //   console.log(includedLetters);
+  //   console.log(notIncludedLetters);
+  // }, [exactLetters, includedLetters, notIncludedLetters]);
 
   const handleEndGame = (state: string) => {
     if (state === GAME_WIN) {
@@ -119,14 +118,14 @@ const GameProvider = ({ children }: Props) => {
       setCurrentWordIdx((prev) => prev + 1);
       setCurrentLetterIdx(0);
 
-      if (words.some((word) => word === correctWord.current)) {
-        handleEndGame(GAME_WIN);
+      if (currentWord.word === correctWord.current) {
+        setTimeout(() => handleEndGame(GAME_WIN), 1000);
 
         return;
       }
 
-      if (currentWordIdx === 6) {
-        handleEndGame(GAME_LOSE);
+      if (currentWordIdx === 5) {
+        setTimeout(() => handleEndGame(GAME_LOSE), 1000);
 
         return;
       }

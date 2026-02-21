@@ -5,9 +5,10 @@ import Keyboard from "@/components/Keyboard/Keyboard";
 import Footer from "@/components/Footer/Footer";
 import useGame from "@/hooks/useGame";
 import "@/assets/index.css";
+import EndGameModal from "@/components/EndGameModal/EndGameModal";
 
 const App = () => {
-  const { handleKeyPress } = useGame();
+  const { handleKeyPress, gameState } = useGame();
 
   useEffect(() => {
     window.onkeydown = (e) => handleKeyPress(e.key);
@@ -17,8 +18,15 @@ const App = () => {
     };
   });
 
+  useEffect(() => {
+    if (gameState != null) {
+      window.onkeydown = null;
+    }
+  }, [gameState]);
+
   return (
     <main>
+      {gameState != null && <EndGameModal />}
       <Header />
       <WordWall />
       <Keyboard />
