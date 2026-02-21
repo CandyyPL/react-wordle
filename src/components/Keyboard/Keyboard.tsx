@@ -1,5 +1,6 @@
 import useGame from "@/hooks/useGame";
 import style from "./Keyboard.module.css";
+import { useCallback } from "react";
 
 type KeyData = {
   style: string;
@@ -8,32 +9,48 @@ type KeyData = {
 };
 
 const Keyboard = () => {
-  const { handleKeyPress } = useGame();
+  const {
+    handleKeyPress,
+    exactLetters: exact,
+    includedLetters: included,
+    notIncludedLetters: notIncluded,
+  } = useGame();
 
   const rows = ["qwertyuiop", "asdfghjkl", "@zxcvbnm#"];
 
-  const getKeyData = (char: string): KeyData => {
-    const baseStyle = [style.keyboardKey];
+  const getKeyData = useCallback(
+    (char: string): KeyData => {
+      const baseStyle = [style.keyboardKey];
 
-    if (char === "@")
-      return {
-        style: baseStyle.concat([style.wideKey, style.enterKey]).join(" "),
-        value: "↵",
-        key: "Enter",
-      };
-    if (char === "#")
-      return {
-        style: baseStyle.concat([style.wideKey]).join(" "),
-        value: "⌫",
-        key: "Backspace",
-      };
+      if (char === "@")
+        return {
+          style: [...baseStyle, style.wideKey, style.enterKey].join(" "),
+          value: "↵",
+          key: "Enter",
+        };
+      if (char === "#")
+        return {
+          style: [...baseStyle, style.wideKey].join(" "),
+          value: "⌫",
+          key: "Backspace",
+        };
 
-    return {
-      style: baseStyle.join(" "),
-      value: char.toUpperCase(),
-      key: char,
-    };
-  };
+      let letterStateStyle: string[] = [];
+
+      if (notIncluded.includes(char.toUpperCase()))
+        letterStateStyle = [style.notIncluded];
+      if (included.includes(char.toUpperCase()))
+        letterStateStyle = [style.included];
+      if (exact.includes(char.toUpperCase())) letterStateStyle = [style.exact];
+
+      return {
+        style: [...baseStyle, ...letterStateStyle].join(" "),
+        value: char.toUpperCase(),
+        key: char,
+      };
+    },
+    [exact, included, notIncluded],
+  );
 
   return (
     <section className={style.keyboardWrapper}>

@@ -66,3 +66,15 @@
     font-size: 1.8rem;
   }
 }
+
+.included {
+  background-color: hsl(50, 88%, 38%);
+}
+
+.exact {
+  background-color: hsl(147, 88%, 38%);
+}
+
+.notIncluded {
+  background-color: #aaa;
+}
