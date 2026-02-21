@@ -29,7 +29,8 @@
     font-size: 1.5rem;
   }
 
-  background-color: #ccc;
+  --prev-color: #ccc;
+  background-color: var(--prev-color);
 
   border: none;
   border-radius: 6px;
@@ -82,6 +83,10 @@
   --target-bg: #50d676;
 }
 
+.included.exact {
+  --prev-color: #dfa253;
+}
+
 .notIncluded {
   --target-bg: #858585;
 }
@@ -89,14 +94,11 @@
 @keyframes color {
   0% {
     transform: scale(1);
-    background-color: #ccc;
+    background-color: var(--prev-color);
   }
   50% {
     transform: scale(0.95);
   }
-  /* 99% {
-    background-color: #ccc;
-  } */
   100% {
     transform: scale(1);
     background-color: var(--target-bg);

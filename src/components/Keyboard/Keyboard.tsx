@@ -37,15 +37,23 @@ const Keyboard = () => {
 
       let letterStateStyle: string[] = [];
 
-      if (notIncluded.includes(char.toUpperCase()))
+      const uppercaseChar = char.toUpperCase();
+
+      if (exact.includes(uppercaseChar)) letterStateStyle = [style.exact];
+
+      if (included.includes(uppercaseChar))
+        if (exact.includes(uppercaseChar)) {
+          letterStateStyle = [style.included, style.exact];
+        } else {
+          letterStateStyle = [style.included];
+        }
+
+      if (notIncluded.includes(uppercaseChar))
         letterStateStyle = [style.notIncluded];
-      if (included.includes(char.toUpperCase()))
-        letterStateStyle = [style.included];
-      if (exact.includes(char.toUpperCase())) letterStateStyle = [style.exact];
 
       return {
         style: [...baseStyle, ...letterStateStyle].join(" "),
-        value: char.toUpperCase(),
+        value: uppercaseChar,
         key: char,
       };
     },
@@ -61,9 +69,8 @@ const Keyboard = () => {
 
             return (
               <button
-                key={letter}
+                key={`${letter} ${style}`}
                 className={style}
-                style={{ "--target-bg": "" } as React.CSSProperties}
                 onClick={() => handleKeyPress(key)}
               >
                 <span>{value}</span>
