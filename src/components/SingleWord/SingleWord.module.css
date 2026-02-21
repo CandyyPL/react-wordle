@@ -95,7 +95,6 @@
   }
   50% {
     transform: scale(0.95) rotate(-5deg);
-    /* background-color: var(--target-bg); */
   }
   100% {
     transform: scale(1);
