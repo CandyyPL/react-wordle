@@ -61,7 +61,7 @@ const GameProvider = ({ children }: Props) => {
 
   const handleEndGame = (state: string) => {
     if (state === GAME_WIN) {
-      setGameState({ state: GAME_WIN, attempts: currentWordIdx });
+      setGameState({ state: GAME_WIN, attempts: currentWordIdx + 1 });
     } else {
       setGameState({ state: GAME_LOSE });
     }
