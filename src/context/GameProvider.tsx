@@ -9,20 +9,23 @@ type Props = {
 const WORD_LENGTH = 6;
 const WORDS_COUNT = 6;
 
+const ENTER_KEY = "Enter";
+const BACKSPACE_KEY = "Backspace";
+
 const EMPTY_WORD = new Array(WORD_LENGTH).fill("#").join("");
 const CHOSEN_WORD = wordlist[Math.floor(Math.random() * wordlist.length)];
-
-const CURRENT_WORD_DEFAULT_VALUE: CurrentWordType = {
-  word: new Array(WORD_LENGTH).fill("#").join(""),
-  wordArray: new Array(WORD_LENGTH).fill({ letter: "#", new: false }),
-  wrong: false,
-};
 
 const GameProvider = ({ children }: Props) => {
   const correctWord = useRef(CHOSEN_WORD);
 
+  const getInitialCurrentWord = () => ({
+    word: "#".repeat(WORD_LENGTH),
+    wordArray: new Array(WORD_LENGTH).fill({ letter: "#", new: false }),
+    wrong: false,
+  });
+
   const [currentWord, setCurrentWord] = useState<CurrentWordType>(
-    CURRENT_WORD_DEFAULT_VALUE,
+    getInitialCurrentWord(),
   );
 
   const [words, setWords] = useState(new Array(WORDS_COUNT).fill(EMPTY_WORD));
@@ -37,10 +40,6 @@ const GameProvider = ({ children }: Props) => {
   useEffect(() => {
     console.log(currentWord);
   }, [currentWord]);
-
-  const clearCurrentWord = () => {
-    setCurrentWord(CURRENT_WORD_DEFAULT_VALUE);
-  };
 
   const handleSetCurrentWord = (word: string) => {
     setCurrentWord((prev) => {
@@ -62,29 +61,32 @@ const GameProvider = ({ children }: Props) => {
   const handleKeyPress = (key: string, event: KeyboardEvent | null = null) => {
     if (event) key = event.key;
 
-    if (key === "Enter" && currentLetterIdx === 6) {
+    if (key === ENTER_KEY) {
+      if (currentLetterIdx !== WORD_LENGTH) return;
+
       if (!wordlist.includes(currentWord.word)) {
         setCurrentWord((prev) => ({ ...prev, wrong: true }));
         return;
       }
 
-      setWords((prev) =>
-        prev.map((word, index) => {
-          if (index === currentWordIdx) {
-            return currentWord.word;
-          } else return word;
-        }),
-      );
+      setWords((prev) => {
+        const newWords = [...prev];
+        newWords[currentWordIdx] = currentWord.word;
+        return newWords;
+      });
 
-      clearCurrentWord();
-
+      setCurrentWord(getInitialCurrentWord());
       setCurrentWordIdx((prev) => prev + 1);
       setCurrentLetterIdx(0);
+
+      return;
     }
 
-    if (currentWordIdx === 6) return;
+    if (currentWordIdx === WORDS_COUNT) return;
 
-    if (key === "Backspace" && currentLetterIdx > 0) {
+    if (key === BACKSPACE_KEY) {
+      if (currentLetterIdx === 0) return;
+
       const newWord = replaceAtWith(
         currentWord.word,
         currentLetterIdx - 1,
@@ -93,9 +95,11 @@ const GameProvider = ({ children }: Props) => {
 
       handleSetCurrentWord(newWord);
       setCurrentLetterIdx((prev) => prev - 1);
+
+      return;
     }
 
-    if (/^[a-zA-Z]$/.test(key) && currentLetterIdx < 6) {
+    if (/^[a-zA-Z]$/.test(key) && currentLetterIdx < WORD_LENGTH) {
       const newWord = replaceAtWith(
         currentWord.word,
         currentLetterIdx,
@@ -104,6 +108,8 @@ const GameProvider = ({ children }: Props) => {
 
       handleSetCurrentWord(newWord);
       setCurrentLetterIdx((prev) => prev + 1);
+
+      return;
     }
   };
 
