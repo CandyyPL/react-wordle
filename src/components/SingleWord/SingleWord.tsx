@@ -14,12 +14,12 @@ const SingleWord = ({ word, wordIdx }: Props) => {
       {Array.from(word).map((letter, index) => {
         let included = false;
         let exact = false;
-        let fail = false;
+        let notIncluded = false;
 
         if (wordIdx < currentWordIdx) {
           included = correctWord.current.includes(letter);
           exact = included && letter === correctWord.current[index];
-          fail = !included && !exact;
+          notIncluded = !included && !exact;
         }
 
         const isCurrent = wordIdx === currentWordIdx;
@@ -29,21 +29,12 @@ const SingleWord = ({ word, wordIdx }: Props) => {
         const pop = active && currentWord.wordArray[index].new;
         const invalid = isCurrent && currentWord.wrong;
 
-        const color = fail
-          ? "#858585"
-          : included
-            ? exact
-              ? "#50d676"
-              : "#dfa253"
-            : "#ddd";
-
         return (
           <div
-            className={`${style.letterBox} ${active && style.active} ${included && style.included} ${exact && style.exact} ${fail && style.fail} ${pop && style.pop} ${invalid && style.shake}`}
+            className={`${style.letterBox} ${active && style.active} ${included && style.included} ${exact && style.exact} ${notIncluded && style.notIncluded} ${pop && style.pop} ${invalid && style.shake}`}
             style={
               {
                 "--index": index,
-                "--target-bg": color,
               } as React.CSSProperties
             }
             key={`${word}-${index}`}

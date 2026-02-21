@@ -51,7 +51,7 @@
 
 .exact,
 .included,
-.fail {
+.notIncluded {
   background-color: #ddd;
 
   border: 2px dashed #000;
@@ -60,17 +60,17 @@
   animation-delay: calc(var(--index) * 100ms);
 }
 
-/* .included {
-  background-color: hsl(50, 88%, 38%);
+.included {
+  --target-bg: #dfa253;
 }
 
 .exact {
-  background-color: hsl(147, 88%, 38%);
+  --target-bg: #50d676;
 }
 
-.fail {
-  background-color: #aaa;
-} */
+.notIncluded {
+  --target-bg: #858585;
+}
 
 .shake {
   animation: shake 0.2s;
@@ -95,7 +95,7 @@
   }
   50% {
     transform: scale(0.95) rotate(-5deg);
-    background-color: var(--target-bg);
+    /* background-color: var(--target-bg); */
   }
   100% {
     transform: scale(1);

@@ -67,14 +67,38 @@
   }
 }
 
+.notIncluded,
+.included,
+.exact {
+  animation: color 0.3s forwards;
+  animation-delay: 600ms;
+}
+
 .included {
-  background-color: hsl(50, 88%, 38%);
+  --target-bg: #dfa253;
 }
 
 .exact {
-  background-color: hsl(147, 88%, 38%);
+  --target-bg: #50d676;
 }
 
 .notIncluded {
-  background-color: #aaa;
+  --target-bg: #858585;
+}
+
+@keyframes color {
+  0% {
+    transform: scale(1);
+    background-color: #ccc;
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  /* 99% {
+    background-color: #ccc;
+  } */
+  100% {
+    transform: scale(1);
+    background-color: var(--target-bg);
+  }
 }

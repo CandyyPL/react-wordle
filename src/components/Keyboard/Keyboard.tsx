@@ -63,6 +63,7 @@ const Keyboard = () => {
               <button
                 key={letter}
                 className={style}
+                style={{ "--target-bg": "" } as React.CSSProperties}
                 onClick={() => handleKeyPress(key)}
               >
                 <span>{value}</span>
