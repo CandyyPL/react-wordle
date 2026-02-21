@@ -9,6 +9,11 @@ export type CurrentWordType = {
   wrong: boolean;
 };
 
+export type GameStateType = {
+  state: "win" | "lose";
+  attempts?: number;
+};
+
 export type GameContextType = {
   correctWord: RefObject<string>;
   currentWord: CurrentWordType;
@@ -26,6 +31,8 @@ export type GameContextType = {
   notIncludedLetters: string[];
   setNotIncludedLetters: React.Dispatch<SetStateAction<string[]>>;
   handleKeyPress: (key: string, event?: KeyboardEvent | null) => void;
+  gameState: GameStateType | null;
+  setGameState: React.Dispatch<SetStateAction<GameStateType | null>>;
 };
 
 export const GameContext = createContext<GameContextType | null>(null);

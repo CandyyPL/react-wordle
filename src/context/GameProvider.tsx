@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GameContext, type CurrentWordType } from "@/context/GameContext";
+import {
+  GameContext,
+  type CurrentWordType,
+  type GameStateType,
+} from "@/context/GameContext";
 import wordlist from "@/db/words";
 
 type Props = {
@@ -14,6 +18,9 @@ const BACKSPACE_KEY = "Backspace";
 
 const EMPTY_WORD = new Array(WORD_LENGTH).fill("#").join("");
 const CHOSEN_WORD = wordlist[Math.floor(Math.random() * wordlist.length)];
+
+const GAME_WIN = "win";
+const GAME_LOSE = "lose";
 
 const GameProvider = ({ children }: Props) => {
   const correctWord = useRef(CHOSEN_WORD);
@@ -37,6 +44,8 @@ const GameProvider = ({ children }: Props) => {
   const [includedLetters, setIncludedLetters] = useState<string[]>([]);
   const [notIncludedLetters, setNotIncludedLetters] = useState<string[]>([]);
 
+  const [gameState, setGameState] = useState<GameStateType | null>(null);
+
   useEffect(() => {
     console.log(correctWord.current);
   }, []);
@@ -50,6 +59,14 @@ const GameProvider = ({ children }: Props) => {
     console.log(includedLetters);
     console.log(notIncludedLetters);
   }, [exactLetters, includedLetters, notIncludedLetters]);
+
+  const handleEndGame = (state: string) => {
+    if (state === GAME_WIN) {
+      setGameState({ state: GAME_WIN, attempts: currentWordIdx });
+    } else {
+      setGameState({ state: GAME_LOSE });
+    }
+  };
 
   const handleSetCurrentWord = (word: string) => {
     setCurrentWord((prev) => {
@@ -102,6 +119,18 @@ const GameProvider = ({ children }: Props) => {
       setCurrentWordIdx((prev) => prev + 1);
       setCurrentLetterIdx(0);
 
+      if (words.some((word) => word === correctWord.current)) {
+        handleEndGame(GAME_WIN);
+
+        return;
+      }
+
+      if (currentWordIdx === 6) {
+        handleEndGame(GAME_LOSE);
+
+        return;
+      }
+
       return;
     }
 
@@ -153,6 +182,8 @@ const GameProvider = ({ children }: Props) => {
     notIncludedLetters,
     setNotIncludedLetters,
     handleKeyPress,
+    gameState,
+    setGameState,
   };
 
   return (
