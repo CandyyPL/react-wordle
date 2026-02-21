@@ -45,9 +45,9 @@ const GameProvider = ({ children }: Props) => {
 
   const [gameState, setGameState] = useState<GameStateType | null>(null);
 
-  useEffect(() => {
-    console.log(correctWord.current);
-  }, []);
+  // useEffect(() => {
+  //   console.log(correctWord.current);
+  // }, []);
 
   // useEffect(() => {
   //   console.log(currentWord);
