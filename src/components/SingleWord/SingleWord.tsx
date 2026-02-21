@@ -22,11 +22,16 @@ const SingleWord = ({ word, wordIdx }: Props) => {
           fail = !included && !exact;
         }
 
-        const active = currentWord[index] !== "#" && wordIdx === currentWordIdx;
+        const isCurrent = wordIdx === currentWordIdx;
+
+        const active = currentWord.word[index] !== "#" && isCurrent;
+
+        const pop = active && currentWord.wordArray[index].new;
+        const invalid = isCurrent && currentWord.wrong;
 
         return (
           <div
-            className={`${style.letterBox} ${active && style.active} ${included && style.included} ${exact && style.exact} ${fail && style.fail}`}
+            className={`${style.letterBox} ${invalid && style.shake} ${active && style.active} ${included && style.included} ${exact && style.exact} ${fail && style.fail} ${pop && style.pop}`}
             key={`${word}-${index}`}
           >
             {letter === "#" ? null : letter}

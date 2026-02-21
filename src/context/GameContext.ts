@@ -1,9 +1,18 @@
 import { createContext, type RefObject, type SetStateAction } from "react";
 
+export type CurrentWordType = {
+  word: string;
+  wordArray: {
+    letter: string;
+    new: boolean;
+  }[];
+  wrong: boolean;
+};
+
 export type GameContextType = {
   correctWord: RefObject<string>;
-  currentWord: string;
-  setCurrentWord: React.Dispatch<SetStateAction<string>>;
+  currentWord: CurrentWordType;
+  setCurrentWord: React.Dispatch<SetStateAction<CurrentWordType>>;
   words: string[];
   setWords: React.Dispatch<SetStateAction<string[]>>;
   currentWordIdx: number;
