@@ -22,7 +22,7 @@ const EMPTY_WORD = new Array(WORD_LENGTH).fill("#").join("");
 const CHOSEN_WORD = wordlist[Math.floor(Math.random() * wordlist.length)];
 
 const GameProvider = ({ children }: Props) => {
-  const correctWord = useRef(CHOSEN_WORD);
+  const correctWord = useRef(btoa(CHOSEN_WORD));
 
   const getInitialCurrentWord = () => ({
     word: "#".repeat(WORD_LENGTH),
@@ -100,9 +100,9 @@ const GameProvider = ({ children }: Props) => {
 
       for (let i = 0; i < 6; i++) {
         const userLetter = currentWord.word[i];
-        const correctLetter = correctWord.current[i];
+        const correctLetter = atob(correctWord.current)[i];
 
-        if (!correctWord.current.includes(userLetter))
+        if (!atob(correctWord.current).includes(userLetter))
           setNotIncludedLetters((prev) => [...prev, userLetter]);
         else {
           if (userLetter === correctLetter)
@@ -121,7 +121,7 @@ const GameProvider = ({ children }: Props) => {
       setCurrentWordIdx((prev) => prev + 1);
       setCurrentLetterIdx(0);
 
-      if (currentWord.word === correctWord.current) {
+      if (currentWord.word === atob(correctWord.current)) {
         setTimeout(() => handleEndGame(GAME_WIN), 1000);
 
         return;

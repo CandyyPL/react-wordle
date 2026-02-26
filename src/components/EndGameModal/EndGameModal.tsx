@@ -20,7 +20,7 @@ const EndGameModal = () => {
         ) : (
           <p>Nie udało ci się odgadnąć hasła:</p>
         )}
-        <p className={style.correct}>{correctWord.current}</p>
+        <p className={style.correct}>{atob(correctWord.current)}</p>
         <button className={style.resetButton} onClick={() => location.reload()}>
           ZAGRAJ JESZCZE RAZ
         </button>

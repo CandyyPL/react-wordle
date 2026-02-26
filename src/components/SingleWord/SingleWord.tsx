@@ -17,8 +17,8 @@ const SingleWord = ({ word, wordIdx }: Props) => {
         let notIncluded = false;
 
         if (wordIdx < currentWordIdx) {
-          included = correctWord.current.includes(letter);
-          exact = included && letter === correctWord.current[index];
+          included = atob(correctWord.current).includes(letter);
+          exact = included && letter === atob(correctWord.current)[index];
           notIncluded = !included && !exact;
         }
 
